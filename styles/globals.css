@@ -1,3 +1,16 @@
+@font-face {
+  font-family: MatterBold;
+  src: url("../public/fonts/Matter-Bold.otf");
+}
+@font-face {
+  font-family: MatterLight;
+  src: url("../public/fonts/Matter-Light.otf");
+}
+@font-face {
+  font-family: MatterRegular;
+  src: url("../public/fonts/Matter-Regular.otf");
+}
+
 :root {
   --content-width: 1340px;
   --text: #232323;
@@ -11,31 +24,41 @@
   padding: 0;
   box-sizing: border-box;
 }
+*:focus {
+  outline: none;
+}
 body {
   background: var(--background);
 }
 h1 {
   font-size: 42px;
+  font-family: MatterBold;
 }
 h2 {
   font-size: 32px;
+  font-family: MatterBold;
 }
 h3 {
   font-size: 26px;
+  font-family: MatterBold;
 }
 h4 {
   font-size: 22px;
+  font-family: MatterBold;
 }
 h5 {
   font-size: 20px;
+  font-family: MatterBold;
 }
 h6 {
   font-size: 18px;
+  font-family: MatterBold;
 }
 p,
 li,
 a {
   font-size: 18px;
+  font-family: MatterRegular;
 }
 a {
   text-decoration: none;
@@ -53,7 +76,7 @@ a {
 }
 nav a {
   font-size: 18px;
-
+  font-family: MatterRegular;
   font-weight: bold;
   text-transform: uppercase;
   text-decoration: none;

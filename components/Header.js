@@ -11,8 +11,8 @@ function Header() {
             <Image
               src="/images/logo.svg"
               alt="Shop logo"
-              width={283}
-              height={64}
+              width={240}
+              height={66}
             />
           </Link>
           <nav>

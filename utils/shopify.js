@@ -3,7 +3,7 @@ const storefrontAccessToken =
   process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
 async function ShopifyData(query) {
-  const URL = `https://${domain}/api/2023-01/graphql.json`;
+  const URL = `https://${domain}/api/2023-04/graphql.json`;
 
   const options = {
     endpoint: URL,
@@ -19,7 +19,7 @@ async function ShopifyData(query) {
     const data = await fetch(URL, options).then((response) => {
       return response.json();
     });
-
+    console.log(data);
     return data;
   } catch (error) {
     throw new Error("Products not fetched");
@@ -29,6 +29,7 @@ async function ShopifyData(query) {
 export async function getAllProducts() {
   const query = `
   {
+    
     products(first: 25) {
       edges {
         node {
@@ -50,6 +51,9 @@ export async function getAllProducts() {
           }
         }
       }
+    }
+    shop {
+      name
     }
   }
 `;
