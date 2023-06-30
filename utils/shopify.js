@@ -19,7 +19,6 @@ async function ShopifyData(query) {
     const data = await fetch(URL, options).then((response) => {
       return response.json();
     });
-    console.log(data);
     return data;
   } catch (error) {
     throw new Error("Products not fetched");
@@ -39,6 +38,7 @@ export async function getAllProducts() {
           priceRange {
             minVariantPrice {
               amount
+              currencyCode
             }
           }
           images(first: 5) {
@@ -52,9 +52,6 @@ export async function getAllProducts() {
         }
       }
     }
-    shop {
-      name
-    }
   }
 `;
 
@@ -63,6 +60,5 @@ export async function getAllProducts() {
   const allProducts = response.data.products.edges
     ? response.data.products.edges
     : [];
-
   return allProducts;
 }

@@ -1,8 +1,6 @@
-import s from "../styles/components/Footer.module.css";
-
 function Footer() {
   return (
-    <footer className={s.footer}>
+    <footer className="w-full h-40 flex items-center justify-center mt-32 border-t-2 border-[--text]">
       <p>
         Next Shopify Template powered by{" "}
         <a target="_blank" rel="noreferrer" href="https://square43.com">

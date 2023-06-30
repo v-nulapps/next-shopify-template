@@ -1,18 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import s from "../styles/components/Header.module.css";
 
 function Header() {
   return (
-    <header className={s.header}>
+    <header className="py-7 border-b-2 border-[--text]">
       <div className="wrapper">
-        <div className={s.headerWrap}>
+        <div className="flex w-full h-full items-center justify-between">
           <Link href="/" className="logo">
             <Image
               src="/images/logo.svg"
               alt="Shop logo"
-              width={240}
-              height={66}
+              width={100}
+              height={44}
             />
           </Link>
           <nav>
