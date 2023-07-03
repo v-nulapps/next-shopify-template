@@ -2,6 +2,7 @@ import Head from "next/head";
 
 import { ReactLenis } from "@studio-freight/react-lenis";
 import ProductList from "components/ProductList";
+import Cart from "@/components/Cart";
 import { getAllProducts } from "utils/shopify";
 
 function Home({ products }) {
@@ -14,7 +15,8 @@ function Home({ products }) {
       </Head>
       <ReactLenis root options={{ duration: 1.2 }}>
         <div className="wrapper">
-          <main>
+          <Cart />
+          <main className="py-20">
             <h1 className="mt-20 mb-16">Home</h1>
             <ProductList products={products} />
           </main>

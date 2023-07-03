@@ -2,7 +2,7 @@ const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
 const storefrontAccessToken =
   process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
-async function ShopifyData(query) {
+async function ShopifyData(query, variables) {
   const URL = `https://${domain}/api/2023-04/graphql.json`;
 
   const options = {
@@ -12,7 +12,7 @@ async function ShopifyData(query) {
       "X-Shopify-Storefront-Access-Token": storefrontAccessToken,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({ query, variables }),
   };
 
   try {
@@ -61,4 +61,104 @@ export async function getAllProducts() {
     ? response.data.products.edges
     : [];
   return allProducts;
+}
+
+export const getProduct = async (handle) => {
+  const productQuery = `
+  query getProduct($handle: String!) {
+    product(handle: $handle) {
+      id
+      handle
+      title
+      description
+      priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      featuredImage {
+        url
+        altText
+        width
+        height
+      }
+      variants(first: 10) {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+  }
+  `;
+
+  const variables = {
+    handle,
+  };
+  try {
+    const { data } = await ShopifyData(productQuery, variables);
+    return data.product;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export async function createCheckout(id, quantity) {
+  const query = `
+    mutation {
+      checkoutCreate(input: {
+        lineItems: [{ variantId: "${id}", quantity: ${quantity}}]
+      }) {
+        checkout {
+          id
+          webUrl
+        }
+      }
+    }`;
+
+  const response = await ShopifyData(query);
+
+  const checkout = response.data.checkoutCreate.checkout
+    ? response.data.checkoutCreate.checkout
+    : [];
+
+  return checkout;
+}
+
+export async function updateCheckout(id, lineItems) {
+  const lineItemsObject = lineItems.map((item) => {
+    return `{
+      variantId: "${item.id}",
+      quantity:  ${item.variantQuantity}
+    }`;
+  });
+
+  const query = `
+  mutation {
+    checkoutLineItemsReplace(lineItems: [${lineItemsObject}], checkoutId: "${id}") {
+      checkout {
+        id
+        webUrl
+        lineItems(first: 25) {
+          edges {
+            node {
+              id
+              title
+              quantity
+            }
+          }
+        }
+      }
+    }
+  }`;
+
+  const response = await ShopifyData(query);
+
+  const checkout = response.data.checkoutLineItemsReplace.checkout
+    ? response.data.checkoutLineItemsReplace.checkout
+    : [];
+
+  return checkout;
 }

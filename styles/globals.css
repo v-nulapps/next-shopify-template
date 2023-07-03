@@ -19,9 +19,9 @@
     --content-width: 1340px;
     --text: #232323;
     --background: #f5f5f5;
-    --radius: 12px;
+    --radius: 6px;
 
-    --accent: #0070f3;
+    --accent: #008cff;
   }
 }
 * {
@@ -65,9 +65,7 @@ a {
   font-size: 18px;
   font-family: MatterRegular;
 }
-a {
-  text-decoration: none;
-}
+
 .wrapper {
   width: 100%;
   max-width: var(--content-width);
@@ -79,7 +77,8 @@ a {
   max-height: 60px;
   width: auto;
 }
-nav a {
+nav a,
+.link {
   font-size: 18px;
   font-family: MatterRegular;
   font-weight: bold;
@@ -87,7 +86,6 @@ nav a {
   text-decoration: none;
   color: var(--text);
   position: relative;
-  padding-bottom: 5px;
 }
 nav a:after {
   display: block;
@@ -102,5 +100,23 @@ nav a:after {
   transform: translateX(-50%);
 }
 nav a:hover:after {
+  width: 100%;
+}
+nav .bag-icon {
+  position: relative;
+}
+nav .bag-icon:after {
+  display: block;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  transition: all 0.3s;
+  background: var(--text);
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+nav .bag-icon:hover:after {
   width: 100%;
 }

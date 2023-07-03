@@ -1,12 +1,11 @@
 import Head from "next/head";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import ProductList from "@/components/ProductList";
-import s from "styles/Home.module.css";
 import { getAllProducts } from "utils/shopify";
 
 function Products({ products }) {
   return (
-    <div className={s.container}>
+    <div>
       <Head>
         <title>Ecom43 | Shop</title>
         <meta name="description" content="Ecom43 shop page" />
@@ -14,8 +13,8 @@ function Products({ products }) {
       </Head>
       <ReactLenis root options={{ duration: 1.2 }}>
         <div className="wrapper">
-          <main className={s.main}>
-            <h1 className={s.title}>Shop</h1>
+          <main className="py-20">
+            <h1 className="mt-20 mb-16">Shop</h1>
             <ProductList products={products} />
           </main>
         </div>
