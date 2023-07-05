@@ -1,9 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { useContext } from "react";
+import { CartContext } from "context/shopContext";
+
 function Header() {
+  const { cart, cartOpen, setCartOpen } = useContext(CartContext);
+  let cartQuantity = 0;
+  cart.map((item) => {
+    return (cartQuantity += item?.variantQuantity);
+  });
+
   return (
-    <header className="py-7 border-b-2 border-[--text] fixed top-0 w-full bg-[--background] z-[10000]">
+    <header className="py-3 border-b-2 border-[--text] fixed top-0 w-full bg-[--background] z-[10000]">
       <div className="wrapper">
         <div className="flex w-full h-full items-center justify-between">
           <Link href="/" className="logo ">
@@ -15,11 +24,12 @@ function Header() {
             />
           </Link>
           <nav className="flex gap-6 items-end">
-            <Link href="/products" className="pb-1">
+            <Link href="/products" className="pb-1 underline-link">
               Shop
             </Link>
-            <Link href="/cart" className="pb-1">
+            <Link href="/cart" className="pb-1 underline-link">
               Cart
+              <span>[{cartQuantity}]</span>
             </Link>
             {/* <Link href="/cart">
               <Image

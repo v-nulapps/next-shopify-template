@@ -142,7 +142,6 @@ export async function createCheckout(id, quantity) {
     }`;
 
   const response = await ShopifyData(query);
-  console.log(response);
   const checkout = response.data.checkoutCreate.checkout
     ? response.data.checkoutCreate.checkout
     : [];
@@ -178,7 +177,6 @@ export async function updateCheckout(id, lineItems) {
   }`;
 
   const response = await ShopifyData(query);
-  console.log(response);
   const checkout = response.data.checkoutLineItemsReplace.checkout
     ? response.data.checkoutLineItemsReplace.checkout
     : [];

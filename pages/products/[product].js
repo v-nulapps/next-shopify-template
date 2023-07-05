@@ -1,12 +1,17 @@
-import React, { useEffect } from "react";
+import Head from "next/head";
 import { getProduct } from "utils/shopify";
 import ProductDetails from "@/components/ProductDetails";
 
 function Product({ productData }) {
   return (
-    <div className="ProductPage py-40">
-      <ProductDetails productData={productData} />
-    </div>
+    <>
+      <Head>
+        <title>Ecom43 | {productData.title}</title>
+      </Head>
+      <div className="ProductPage py-40">
+        <ProductDetails productData={productData} />
+      </div>
+    </>
   );
 }
 

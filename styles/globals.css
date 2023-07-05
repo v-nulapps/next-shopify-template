@@ -77,7 +77,7 @@ a {
   max-height: 60px;
   width: auto;
 }
-nav a,
+.underline-link,
 .link {
   font-size: 18px;
   font-family: MatterRegular;
@@ -85,8 +85,9 @@ nav a,
   text-transform: uppercase;
   text-decoration: none;
   position: relative;
+  margin-bottom: -4px;
 }
-nav a:after {
+.underline-link:after {
   display: block;
   content: "";
   position: absolute;
@@ -98,7 +99,7 @@ nav a:after {
   bottom: 0;
   transform: translateX(-50%);
 }
-nav a:hover:after {
+.underline-link:hover:after {
   width: 100%;
 }
 nav .bag-icon {

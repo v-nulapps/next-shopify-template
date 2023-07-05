@@ -9,13 +9,27 @@ export default function ShopProvider({ children }) {
   const [checkoutId, setCheckoutId] = useState("");
   const [checkoutUrl, setCheckoutUrl] = useState("");
 
+  useEffect(() => {
+    if (localStorage.checkout_id) {
+      const cartObject = JSON.parse(localStorage.checkout_id);
+
+      if (cartObject[0].id) {
+        setCart([cartObject[0]]);
+      } else if (cartObject[0].length > 0) {
+        setCart(...[cartObject[0]]);
+      }
+      setCheckoutId(cartObject[1].id);
+      setCheckoutUrl(cartObject[1].webUrl);
+    }
+  }, []);
+
   async function addToCart(newItem) {
     if (cart.length == 0) {
       setCart([newItem]);
 
       const checkout = await createCheckout(
-        newItem.node.id,
-        (newItem.node.variantQuantity = 1)
+        newItem.id,
+        newItem.variantQuantity
       );
 
       setCheckoutId(checkout.id);
@@ -26,8 +40,8 @@ export default function ShopProvider({ children }) {
       let newCart = [...cart];
 
       cart.map((item) => {
-        if (item.node.id === newItem.node.id) {
-          item.node.variantQuantity++;
+        if (item.id === newItem.id) {
+          item.variantQuantity++;
           newCart = [...cart];
         } else {
           newCart = [...cart, newItem];

@@ -3,7 +3,8 @@ import Image from "next/image";
 import { CartContext } from "context/shopContext";
 
 function ProductDetails({ productData }) {
-  console.log(productData);
+  const { addToCart } = useContext(CartContext);
+
   const allVariantOptions = productData.variants.edges?.map((variant) => {
     const allOptions = {};
 
@@ -28,11 +29,28 @@ function ProductDetails({ productData }) {
   productData.options.map((item) => {
     defaultValues[item.name] = item.values[0];
   });
-
   const [selectedVariant, setSelectedVariant] = useState(allVariantOptions[0]);
   const [selectedOptions, setSelectedOptions] = useState(defaultValues);
-  console.log(selectedVariant);
-  const { addToCart } = useContext(CartContext);
+
+  function setOptions(name, value) {
+    setSelectedOptions((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+
+    const selection = {
+      ...selectedOptions,
+      [name]: value,
+    };
+
+    allVariantOptions.map((item) => {
+      if (JSON.stringify(item.options) === JSON.stringify(selection)) {
+        setSelectedVariant(item);
+      }
+    });
+  }
 
   return (
     <div className="ProductDetails">
@@ -54,28 +72,37 @@ function ProductDetails({ productData }) {
               {productData.priceRange.minVariantPrice.amount}{" "}
               {productData.priceRange.minVariantPrice.currencyCode}
             </h3>
-            <div className="flex gap-4">
-              {productData.options &&
-                productData.options.forEach((option) => {
-                  option.values.map((value, index) => {
-                    return (
-                      <button
-                        key={index}
-                        // className={`link border-2 border-[--black] rounded-[--radius] hover:border-[--accent] hover:text-[--accent] transition duration-300 w-[55px] h-[55px] ${
-                        //   selectedVariant.node?.title == option.node.title
-                        //     ? "border-[--accent] text-[--accent]"
-                        //     : ""
-                        // }`}
-                      >
-                        {value}
-                      </button>
-                    );
-                  });
-                })}
-            </div>
+
+            {productData.options &&
+              productData.options.map((option) => {
+                return (
+                  <div key={`key-${option.name}`}>
+                    <h3 className="mb-2">{option.name}</h3>
+                    <div className="flex gap-4">
+                      {option.values.map((value, index) => {
+                        const checked = selectedOptions[option.name] === value;
+                        return (
+                          <button
+                            key={index}
+                            className={`link border-2 border-[--black] rounded-[--radius] hover:border-[--accent] hover:text-[--accent] transition duration-300 min-w-[55px] h-[55px] px-2 ${
+                              checked ? "border-[--accent] text-[--accent]" : ""
+                            }`}
+                            onClick={() => {
+                              setOptions(option.name, value);
+                            }}
+                          >
+                            {value}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+
             <button
               data-cursor="pointer"
-              className="py-3 link flex-grow border-2 border-[--black] rounded-[--radius] hover:border-[--accent] hover:text-[--accent] transition duration-300"
+              className="py-3 link flex-grow border-2 border-[--black] rounded-[--radius] hover:border-[--accent] hover:text-[--accent] transition duration-300 w-1/2"
               onClick={() => {
                 addToCart(selectedVariant);
               }}

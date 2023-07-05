@@ -6,9 +6,9 @@ function ProductCard(props) {
   return (
     <Link
       href={`/products/${props.product.handle}`}
-      className="bg-transparent rounded-[--radius] border-2 border-[--text] transition duration-300 hover:border-[--accent] hover:text-[--accent]"
+      className={`bg-transparent rounded-[--radius] border-2 border-[--text] transition duration-300 hover:border-[--accent] hover:text-[--accent] flex flex-col justify-between ${props.customClass}`}
     >
-      <div className="h-[300px] relative">
+      <div className={`${props.largeImage ? "h-5/6" : "h-[300px]"} relative`}>
         <Image
           fill
           sizes="(max-width: 768px) 100vw,
