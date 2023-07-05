@@ -84,7 +84,6 @@ nav a,
   font-weight: bold;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--text);
   position: relative;
 }
 nav a:after {

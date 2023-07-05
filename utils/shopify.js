@@ -3,7 +3,7 @@ const storefrontAccessToken =
   process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
 async function ShopifyData(query, variables) {
-  const URL = `https://${domain}/api/2023-04/graphql.json`;
+  const URL = `https://${domain}/api/2023-07/graphql.json`;
 
   const options = {
     endpoint: URL,
@@ -83,12 +83,35 @@ export const getProduct = async (handle) => {
         width
         height
       }
-      variants(first: 10) {
+      variants(first: 25) {
         edges {
           node {
             id
+            title
+            selectedOptions {
+              name
+              value
+            }
+            image {
+              altText
+              url
+            }
+            availableForSale
+            price {
+              amount
+              currencyCode
+            }
+            product {
+              handle
+              title
+            }
           }
         }
+      }
+      options {
+        name
+        values
+        id
       }
     }
   }
@@ -119,7 +142,7 @@ export async function createCheckout(id, quantity) {
     }`;
 
   const response = await ShopifyData(query);
-
+  console.log(response);
   const checkout = response.data.checkoutCreate.checkout
     ? response.data.checkoutCreate.checkout
     : [];
@@ -155,7 +178,7 @@ export async function updateCheckout(id, lineItems) {
   }`;
 
   const response = await ShopifyData(query);
-
+  console.log(response);
   const checkout = response.data.checkoutLineItemsReplace.checkout
     ? response.data.checkoutLineItemsReplace.checkout
     : [];

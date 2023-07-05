@@ -18,7 +18,10 @@ function Header() {
             <Link href="/products" className="pb-1">
               Shop
             </Link>
-            <Link href="/cart">
+            <Link href="/cart" className="pb-1">
+              Cart
+            </Link>
+            {/* <Link href="/cart">
               <Image
                 src="/images/bag-icon.svg"
                 alt="bag icon"
@@ -27,7 +30,7 @@ function Header() {
                 className="bag-icon"
                 data-cursor="pointer"
               />
-            </Link>
+            </Link> */}
           </nav>
         </div>
       </div>
