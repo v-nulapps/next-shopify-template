@@ -11,14 +11,13 @@ function Products({ products }) {
         <meta name="description" content="Ecom43 shop page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ReactLenis root options={{ duration: 1.2 }}>
-        <div className="wrapper">
-          <main className="py-20">
-            <h1 className="mt-20 mb-16">Shop</h1>
-            <ProductList products={products} />
-          </main>
-        </div>
-      </ReactLenis>
+
+      <div className="wrapper">
+        <main className="py-20">
+          <h1 className="mt-20 mb-16">Shop</h1>
+          <ProductList products={products} />
+        </main>
+      </div>
     </div>
   );
 }

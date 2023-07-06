@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Cart from "./Cart";
 
 import { useContext } from "react";
 import { CartContext } from "context/shopContext";
@@ -12,11 +13,13 @@ function Header() {
   });
 
   return (
-    <header className="py-3 border-b-2 border-[--text] fixed top-0 w-full bg-[--background] z-[10000]">
-      <div className="wrapper">
+    <header className=" py-3 border-b-2 border-[--text] fixed top-0 w-full bg-[--background] z-[10000]">
+      <div className="wrapper h-full relative">
+        <Cart />
         <div className="flex w-full h-full items-center justify-between">
-          <Link href="/" className="logo ">
+          <Link href="/" className="logo">
             <Image
+              className="h-[55px]"
               src="/images/logo.svg"
               alt="Shop logo"
               width={100}
@@ -27,20 +30,24 @@ function Header() {
             <Link href="/products" className="pb-1 underline-link">
               Shop
             </Link>
-            <Link href="/cart" className="pb-1 underline-link">
-              Cart
-              <span>[{cartQuantity}]</span>
-            </Link>
-            {/* <Link href="/cart">
+            <div
+              onClick={() => setCartOpen(true)}
+              className="pb-1 underline-link"
+            >
               <Image
                 src="/images/bag-icon.svg"
                 alt="bag icon"
-                width={27}
-                height={35}
-                className="bag-icon"
-                data-cursor="pointer"
+                width={20}
+                height={20}
               />
-            </Link> */}
+              <span
+                className={`absolute right-[-10px] top-[-5px] rounded-full text-[10px] text-white bg-black h-4 w-4 text-center transition duration-700 ${
+                  cartQuantity == 0 ? "opacity-0" : "opacity-1"
+                }`}
+              >
+                {cartQuantity}
+              </span>
+            </div>
           </nav>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { getProduct } from "utils/shopify";
 import ProductDetails from "@/components/ProductDetails";
+import { ReactLenis } from "@studio-freight/react-lenis";
 
 function Product({ productData }) {
   return (
@@ -8,6 +9,7 @@ function Product({ productData }) {
       <Head>
         <title>Ecom43 | {productData.title}</title>
       </Head>
+
       <div className="ProductPage py-40">
         <ProductDetails productData={productData} />
       </div>

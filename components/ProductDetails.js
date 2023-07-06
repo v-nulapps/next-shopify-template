@@ -3,7 +3,7 @@ import Image from "next/image";
 import { CartContext } from "context/shopContext";
 
 function ProductDetails({ productData }) {
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, setCartOpen, cartOpen } = useContext(CartContext);
 
   const allVariantOptions = productData.variants.edges?.map((variant) => {
     const allOptions = {};
@@ -106,6 +106,7 @@ function ProductDetails({ productData }) {
               data-cursor="pointer"
               className="py-3 link flex-grow border-2 border-[--black] rounded-[--radius] hover:border-[--accent] hover:text-[--accent] transition duration-300 w-1/2"
               onClick={() => {
+                cartOpen ? null : setCartOpen(true);
                 addToCart(selectedVariant);
               }}
             >

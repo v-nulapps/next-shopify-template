@@ -32,6 +32,21 @@
 *:focus {
   outline: none;
 }
+::-webkit-scrollbar {
+  background: var(--background);
+  width: 6px;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text);
+  border-radius: 6px;
+}
 body {
   background: var(--background);
 }
