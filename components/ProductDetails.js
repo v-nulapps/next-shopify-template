@@ -18,10 +18,12 @@ function ProductDetails({ productData }) {
       title: productData.title,
       handle: productData.handle,
       image: variant.node.image?.url,
+      altText: variant.node.image?.altText,
       options: allOptions,
       variantTitle: variant.node.title,
       variantPrice: variant.node.price.amount,
       variantQuantity: 1,
+      currencyCode: variant.node.price.currencyCode,
     };
   });
 

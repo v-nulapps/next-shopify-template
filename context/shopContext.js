@@ -15,6 +15,7 @@ export default function ShopProvider({ children }) {
 
       if (cartObject[0].id) {
         setCart([cartObject[0]]);
+        console.log(cart);
       } else if (cartObject[0].length > 0) {
         setCart(...[cartObject[0]]);
       }
