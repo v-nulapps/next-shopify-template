@@ -12,7 +12,7 @@ function MiniCart() {
         cartOpen
           ? "opacity-1 pointer-events-auto"
           : "opacity-0 pointer-events-none"
-      } transition duration-500 absolute tablet:right-4 right-0 tablet:h-auto h-[100vh] bottom-[-14px] bg-white tablet:w-100 w-full translate-y-full p-8 pt-12 rounded-[--radius]`}
+      } transition duration-500 absolute tablet:right-4 right-0 tablet:h-auto h-[100vh] bottom-[-14px] bg-white tablet:w-96 w-full translate-y-full p-8 pt-12 rounded-[--radius]`}
     >
       <Image
         className="absolute right-3 top-3"

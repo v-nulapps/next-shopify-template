@@ -44,7 +44,7 @@ function Header() {
                 className="w-5 h-auto"
               />
               <span
-                className={`absolute right-[-10px] top-[-5px] rounded-full text-[10px] text-white bg-black h-4 w-4 text-center transition duration-700  ${
+                className={`absolute right-[-10px] top-[-5px] rounded-full text-[10px] text-white bg-black h-4 w-4 transition duration-700 flex justify-center items-center ${
                   cartQuantity == 0 ? "opacity-0" : "opacity-1"
                 }`}
               >

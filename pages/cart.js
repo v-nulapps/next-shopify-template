@@ -18,8 +18,8 @@ export default function Cart() {
       <div className="py-40">
         <div className="wrapper">
           <h1 className="mb-10">Shopping Cart</h1>
-          <div className="flex gap-8 relative">
-            <div className="w-4/6">
+          <div className="flex gap-8 relative flex-col tablet:flex-row">
+            <div className="tablet:w-3/6 laptop:w-4/6 w-full">
               {cart.length != 0 ? (
                 cart.toReversed().map((item) => {
                   cartTotal += parseFloat(
@@ -40,9 +40,9 @@ export default function Cart() {
               )}
             </div>
             {cart.length != 0 ? (
-              <div className="w-2/6 mt-8 sticky top-[109px] right-0 h-[350px]">
+              <div className="tablet:w-3/6 laptop:w-2/6 w-full mt-8 sticky top-[109px] right-0 h-[350px]">
                 <div className="border-2 border-black rounded-[--radius] p-8 flex flex-col justify-between h-[263px]">
-                  <div className="flex  justify-between items-center">
+                  <div className="flex justify-between items-center">
                     <h3>Cart Total</h3>
                     <p>{cartTotal}.0 RSD</p>
                   </div>
