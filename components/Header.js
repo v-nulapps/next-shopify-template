@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Cart from "./Cart";
+import MiniCart from "./MiniCart";
 
 import { useContext } from "react";
 import { CartContext } from "context/shopContext";
@@ -15,7 +15,7 @@ function Header() {
   return (
     <header className=" py-3 border-b-2 border-[--text] fixed top-0 w-full bg-[--background] z-[10000]">
       <div className="wrapper h-full relative">
-        <Cart />
+        <MiniCart />
         <div className="flex w-full h-full items-center justify-between">
           <Link href="/" className="logo">
             <Image
@@ -24,6 +24,7 @@ function Header() {
               alt="Shop logo"
               width={100}
               height={44}
+              priority
             />
           </Link>
           <nav className="flex gap-6 items-end">
@@ -32,16 +33,18 @@ function Header() {
             </Link>
             <div
               onClick={() => setCartOpen(true)}
-              className="pb-1 underline-link"
+              className="pb-1 underline-link cursor-pointer"
+              data-cursor="pointer"
             >
               <Image
                 src="/images/bag-icon.svg"
                 alt="bag icon"
                 width={20}
-                height={20}
+                height={25}
+                className="w-5 h-auto"
               />
               <span
-                className={`absolute right-[-10px] top-[-5px] rounded-full text-[10px] text-white bg-black h-4 w-4 text-center transition duration-700 ${
+                className={`absolute right-[-10px] top-[-5px] rounded-full text-[10px] text-white bg-black h-4 w-4 text-center transition duration-700  ${
                   cartQuantity == 0 ? "opacity-0" : "opacity-1"
                 }`}
               >

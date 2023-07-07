@@ -175,7 +175,6 @@ export async function updateCheckout(id, lineItems) {
       }
     }
   }`;
-
   const response = await ShopifyData(query);
   const checkout = response.data.checkoutLineItemsReplace.checkout
     ? response.data.checkoutLineItemsReplace.checkout

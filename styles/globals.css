@@ -80,6 +80,12 @@ a {
   font-size: 18px;
   font-family: MatterRegular;
 }
+button:disabled,
+button:disabled:hover {
+  border-color: lightgrey;
+  color: lightgrey;
+  cursor: not-allowed;
+}
 
 .wrapper {
   width: 100%;

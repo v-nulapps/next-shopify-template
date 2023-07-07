@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import Image from "next/image";
 import { CartContext } from "context/shopContext";
 
 function ProductDetails({ productData }) {
-  const { addToCart, setCartOpen, cartOpen } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
 
   const allVariantOptions = productData.variants.edges?.map((variant) => {
     const allOptions = {};
@@ -54,18 +54,20 @@ function ProductDetails({ productData }) {
     });
   }
 
+  const addToCartBtn = useRef(null);
+
   return (
     <div className="ProductDetails">
-      <div className="wrapper flex">
+      <div className="wrapper flex tablet:flex-row flex-col">
         <Image
           src={productData.featuredImage.url}
           alt={productData.featuredImage.altText}
           width={600}
           height={600}
-          className="w-1/2"
+          className="tablet:w-1/2 w-full mb-8 h-auto object-contain"
           priority
         />
-        <div className="details w-1/2">
+        <div className="details tablet:w-1/2 w-full">
           <h1>{productData.title}</h1>
           <p>{productData.descripotion}</p>
 
@@ -80,7 +82,7 @@ function ProductDetails({ productData }) {
                 return (
                   <div key={`key-${option.name}`}>
                     <h3 className="mb-2">{option.name}</h3>
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 flex-wrap">
                       {option.values.map((value, index) => {
                         const checked = selectedOptions[option.name] === value;
                         return (
@@ -103,11 +105,15 @@ function ProductDetails({ productData }) {
               })}
 
             <button
+              ref={addToCartBtn}
               data-cursor="pointer"
-              className="py-3 link flex-grow border-2 border-[--black] rounded-[--radius] hover:border-[--accent] hover:text-[--accent] transition duration-300 w-1/2"
+              className="py-3 link flex-grow border-2 border-[--black] rounded-[--radius] hover:border-[--accent] hover:text-[--accent] transition duration-300 tablet:w-1/2 w-full"
               onClick={() => {
-                cartOpen ? null : setCartOpen(true);
                 addToCart(selectedVariant);
+                addToCartBtn.current.disabled = true;
+                setTimeout(() => {
+                  addToCartBtn.current.disabled = false;
+                }, 1000);
               }}
             >
               Add to cart

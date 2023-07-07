@@ -3,13 +3,16 @@ import { CartContext } from "context/shopContext";
 import Link from "next/link";
 import CartProduct from "@/components/CartProduct";
 import { ReactLenis } from "@studio-freight/react-lenis";
+
+Cart.title = "Ecom43 | Cart";
+
 export default function Cart() {
   const { checkoutUrl, cart } = useContext(CartContext);
   const [cartList, setCartList] = useState([]);
 
   let cartTotal = 0;
   let shippingPlaceholder = 300;
-  console.log(checkoutUrl);
+
   return (
     <>
       <div className="py-40">
@@ -18,7 +21,7 @@ export default function Cart() {
           <div className="flex gap-8 relative">
             <div className="w-4/6">
               {cart.length != 0 ? (
-                cart.map((item) => {
+                cart.toReversed().map((item) => {
                   cartTotal += parseFloat(
                     item.variantPrice * item.variantQuantity
                   );

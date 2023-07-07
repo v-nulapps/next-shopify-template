@@ -7,10 +7,10 @@ function Product({ productData }) {
   return (
     <>
       <Head>
-        <title>Ecom43 | {productData.title}</title>
+        <title>{productData.title}</title>
       </Head>
 
-      <div className="ProductPage py-40">
+      <div className="ProductPage tablet:py-40 py-28">
         <ProductDetails productData={productData} />
       </div>
     </>

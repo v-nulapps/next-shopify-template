@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import { ReactLenis } from "@studio-freight/react-lenis";
 import ProductListFeatured from "components/ProductListFeatured";
-import Cart from "@/components/Cart";
+import Cart from "@/components/MiniCart";
 import { getAllProducts } from "utils/shopify";
 
 function Home({ products }) {

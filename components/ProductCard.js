@@ -6,9 +6,13 @@ function ProductCard(props) {
   return (
     <Link
       href={`/products/${props.product.handle}`}
-      className={`bg-transparent rounded-[--radius] border-2 border-[--text] transition duration-300 hover:border-[--accent] hover:text-[--accent] flex flex-col justify-between ${props.customClass}`}
+      className={`bg-transparent rounded-[--radius] border-2 border-[--text] transition duration-300 hover:border-[--accent] hover:text-[--accent] flex flex-col justify-between w-full ${props.customClass}`}
     >
-      <div className={`${props.largeImage ? "h-5/6" : "h-[300px]"} relative`}>
+      <div
+        className={`${
+          props.largeImage ? "tablet:h-5/6" : "h-[300px]"
+        } relative min-h-[300px]`}
+      >
         <Image
           fill
           sizes="(max-width: 768px) 100vw,

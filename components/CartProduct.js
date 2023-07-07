@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function CartProduct({ item }) {
   const properties = Object.keys(item.options);
-  console.log(item);
+
   return (
     <div className="CartProduct my-8 ">
       <div className="flex py-8 border-2 border-black rounded-[--radius]">
